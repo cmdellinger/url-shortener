@@ -1,0 +1,10 @@
+snipurl-spec.md
+
+# sql database data
+backend/mssql_data/
+
+# OS
+.DS_Store
+
+# VS Code (if you want to share .vscode/settings.json but ignore local junk)
+.vscode/*.log
