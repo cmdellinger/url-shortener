@@ -4,6 +4,7 @@ using Infrastructure.Identity;
 using Core.Interfaces;
 using Microsoft.OpenApi.Models;
 using Infrastructure.Links;
+using API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -65,6 +66,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IShortCodeGenerator, ShortCodeGenerator>();
 builder.Services.AddScoped<IShortLinkRepository, ShortLinkRepository>();
 builder.Services.AddScoped<IShortLinkService, ShortLinkService>();
+builder.Services.AddScoped<IClickEventRepository, ClickEventRepository>();
 
 var app = builder.Build();
 
@@ -74,6 +76,7 @@ app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<RedirectMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -5,7 +5,8 @@ using Core.Interfaces;
 namespace Infrastructure.Links;
 
 public class ShortLinkService(IShortLinkRepository linkRepo,
-                              IShortCodeGenerator codeGenerator) : IShortLinkService
+                              IShortCodeGenerator codeGenerator,
+                              IClickEventRepository clickEventRepo) : IShortLinkService
 {
     public async Task<LinkDto> CreateShortLinkAsync(CreateLinkDto createLinkDto, string userId)
     {
@@ -43,9 +44,26 @@ public class ShortLinkService(IShortLinkRepository linkRepo,
         return LinkDto.FromEntity(link);
     }
 
-    public Task<string?> ResolveAndTrackAsync(string shortCode, string? ipAddress, string? userAgent, string? referrer)
+    public async Task<string?> ResolveAndTrackAsync(string shortCode, string? ipAddress, string? userAgent, string? referrer)
     {
-        throw new NotImplementedException();
+        var link = await linkRepo.GetShortLinkByShortCodeAsync(shortCode);
+        if (link == null
+            || !link.IsActive
+            || (link.ExpiresAt.HasValue && DateTimeOffset.UtcNow > link.ExpiresAt))
+        {
+            return null;        
+        }
+
+        await clickEventRepo.AddClickEventAsync(
+            new ClickEvent
+            {
+                ShortLinkId = link.Id,
+                Referrer = referrer,
+                UserAgent = userAgent,
+                IpAddress = ipAddress
+            }
+        );
+        return link.OriginalUrl;
     }
 
     public async Task<LinkDto?> UpdateLinkAsync(int id, UpdateLinkDto updateLinkDto, string userId)

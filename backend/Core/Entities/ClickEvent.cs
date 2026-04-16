@@ -5,7 +5,7 @@ namespace Core.Entities;
 public class ClickEvent : BaseEntity
 {
     public required int ShortLinkId { get; set; }
-    public required ShortLink ShortLink { get; set; }
+    public ShortLink ShortLink { get; set; } = null!;
     [MaxLength(2048)]
     public string? Referrer { get; set; }
     [MaxLength(200)]
