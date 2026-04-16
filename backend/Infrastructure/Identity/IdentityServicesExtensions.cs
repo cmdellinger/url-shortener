@@ -1,7 +1,6 @@
 using System.Text;
 using Core.Entities;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
