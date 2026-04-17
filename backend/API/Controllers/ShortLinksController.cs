@@ -48,6 +48,18 @@ namespace API.Controllers
             return Ok(link);
         }
 
+        [HttpGet("{id:int}/analytics")]
+        public async Task<ActionResult<LinkAnalyticsDto>> GetLinkAnalytics(int id)
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var analytics = await linkService.GetLinkAnalyticsAsync(id, userId);
+            if (analytics == null) return NotFound();
+
+            return analytics;
+        }
+
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateShortLink(int id, UpdateLinkDto updateLinkDto)
         {

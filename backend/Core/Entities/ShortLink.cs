@@ -14,4 +14,5 @@ public class ShortLink : BaseEntity
     public AppUser User { get; set; } = null!;
     public DateTimeOffset? ExpiresAt { get; set; }
     public bool IsActive { get; set; } = true;
+    public ICollection<ClickEvent> ClickEvents { get; set; } = [];
 }

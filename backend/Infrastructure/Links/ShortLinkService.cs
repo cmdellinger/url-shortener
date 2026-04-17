@@ -31,6 +31,21 @@ public class ShortLinkService(IShortLinkRepository linkRepo,
         return true;
     }
 
+    public async Task<LinkAnalyticsDto?> GetLinkAnalyticsAsync(int id, string userId)
+    {
+        var link = await linkRepo.GetShortLinkByIdAsync(id);
+        if (link == null || link.UserId != userId) return null;
+
+        return new LinkAnalyticsDto
+        {
+            TotalClickEvents = await clickEventRepo.GetTotalClickEventsByShortLinkIdAsync(id),
+            ClickEventsToday = await clickEventRepo.GetClickEventsTodayByShortLinkIdAsync(id),
+            ClickEventsWeek = await clickEventRepo.GetClickEventsWeekByShortLinkIdAsync(id),
+            ClickEvents30Days = await clickEventRepo.GetClickEvents30DaysByShortLinkIdAsync(id),
+            TopReferrer = await clickEventRepo.GetTopReferrerByShortLinkIdAsync(id)
+        };
+    }
+
     public async Task<IList<LinkDto>> GetListOfShortLinksAsync(string userId)
     {
         var shortLinks = await linkRepo.GetShortLinksByUserAsync(userId);

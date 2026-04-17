@@ -67,6 +67,7 @@ builder.Services.AddScoped<IShortCodeGenerator, ShortCodeGenerator>();
 builder.Services.AddScoped<IShortLinkRepository, ShortLinkRepository>();
 builder.Services.AddScoped<IShortLinkService, ShortLinkService>();
 builder.Services.AddScoped<IClickEventRepository, ClickEventRepository>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 var app = builder.Build();
 

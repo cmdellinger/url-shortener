@@ -316,7 +316,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.ClickEvent", b =>
                 {
                     b.HasOne("Core.Entities.ShortLink", "ShortLink")
-                        .WithMany()
+                        .WithMany("ClickEvents")
                         .HasForeignKey("ShortLinkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -384,6 +384,11 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.ShortLink", b =>
+                {
+                    b.Navigation("ClickEvents");
                 });
 #pragma warning restore 612, 618
         }

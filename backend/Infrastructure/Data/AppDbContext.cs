@@ -41,7 +41,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
         
         modelBuilder.Entity<ClickEvent>()
             .HasOne(clickEvent => clickEvent.ShortLink)
-            .WithMany()
+            .WithMany(shortLink => shortLink.ClickEvents)
             .HasForeignKey(clickEvent => clickEvent.ShortLinkId)
             .OnDelete(DeleteBehavior.Cascade);
 

@@ -24,7 +24,7 @@ public class LinkDto
             CreatedAt = shortLink.CreatedAt,
             ExpiresAt = shortLink.ExpiresAt,
             IsActive = shortLink.IsActive,
-            ClickCount = 0
+            ClickCount = shortLink.ClickEvents.Count
         };
     }
 }

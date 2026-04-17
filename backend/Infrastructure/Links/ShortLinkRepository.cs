@@ -39,6 +39,16 @@ public class ShortLinkRepository(AppDbContext context) : IShortLinkRepository
             .ToListAsync();
     }
 
+    public async Task<IList<ShortLink>> GetTopLinksByUserAsync(string userId, int count)
+    {
+        return await context.ShortLinks
+            .Where(link => link.UserId == userId)
+            .Include(link => link.ClickEvents)
+            .OrderByDescending(link => link.ClickEvents.Count)
+            .Take(count)
+            .ToListAsync();
+    }
+
     public async Task UpdateShortLinkAsync(ShortLink shortLink)
     {
         context.Entry(shortLink).State = EntityState.Modified;
