@@ -1,0 +1,12 @@
+<div>
+    <hr>
+    @for (link of links(); track link.id) {
+        short code: {{ link.shortCode }} <br>
+        original url: {{ link.originalUrl }} <br>
+        click count: {{ link.clickCount }} <br>
+        <button (click)="onEdit(link.id)">edit</button> <br>
+        <button (click)="onAnalytics(link.id)">analytics</button> <br>
+        <button (click)="onDelete(link.id)">delete</button> <br>
+        <hr>
+    }
+</div>

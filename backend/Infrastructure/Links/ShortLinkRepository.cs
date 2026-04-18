@@ -35,6 +35,7 @@ public class ShortLinkRepository(AppDbContext context) : IShortLinkRepository
     {
         return await context.ShortLinks
             .Where(shortLink => shortLink.UserId == userId)
+            .Include(shortLink => shortLink.ClickEvents)
             .OrderByDescending(shortLink => shortLink.CreatedAt)
             .ToListAsync();
     }

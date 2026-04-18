@@ -1,0 +1,20 @@
+<div>
+    Total Links: {{ dashboard()?.totalLinks }} <br>
+    Total Clicks: {{ dashboard()?.totalClicks }} <br>
+    Clicks Today: {{ dashboard()?.clicksToday }} <br>
+    Top Links: <br>
+    @if(dashboard()?.topLinks)
+    {
+        <ul>
+            @for (link of dashboard()?.topLinks; track $index) {
+                <li>{{ link.shortCode }}</li>
+            }
+        </ul>
+    } @else {
+        none
+    }
+</div>
+
+<app-link-form (linkCreated)="onLinkCreated()"/>
+
+<app-link-list />

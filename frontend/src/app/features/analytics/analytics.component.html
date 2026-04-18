@@ -1,0 +1,34 @@
+<div>
+    ShortCode: {{ link()?.shortCode }} <br>
+    @if (link()?.title)
+    {
+        Title: {{ link()?.title }} <br>
+    }
+    Url: {{ link()?.originalUrl }}
+</div>
+<hr>
+<div>
+    Total Clicks: {{ analytics()?.totalClickEvents }} <br>
+    Clicks Today:   {{ analytics()?.clickEventsToday }} <br>
+    Clicks This Week: {{ analytics()?.clickEventsWeek }} <br>
+    Click Last 30 Days: <br>
+    @if (analytics()?.clickEvents30Days)
+    {
+        <ul>
+            @for (clickByDate of analytics()?.clickEvents30Days; track $index)
+            {
+                <li> {{clickByDate.date}}: {{clickByDate.count}} </li>
+            }
+        </ul>
+    }
+    TopReferrers: <br>
+    @if (analytics()?.topReferrer)
+    {
+        <ul>
+            @for (referrer of analytics()?.topReferrer; track $index)
+            {
+                <li> {{referrer.referrer}}: {{referrer.count}} </li>
+            }
+        </ul>
+    }
+</div>

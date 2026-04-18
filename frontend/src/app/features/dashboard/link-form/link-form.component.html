@@ -1,0 +1,11 @@
+<form [formGroup]="newLinkForm" (ngSubmit)="createLink()">
+    <mat-form-field>
+        <mat-label for="url">url</mat-label>
+        <input matInput formControlName="url">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="title">title</mat-label>
+        <input matInput formControlName="title">
+    </mat-form-field>
+    <button matButton="tonal" type="submit">create link</button>
+</form>
