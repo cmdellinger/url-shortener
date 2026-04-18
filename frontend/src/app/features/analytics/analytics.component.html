@@ -1,34 +1,55 @@
-<div>
-    ShortCode: {{ link()?.shortCode }} <br>
-    @if (link()?.title)
-    {
-        Title: {{ link()?.title }} <br>
-    }
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            @if (link()?.title)
+            {
+                Title: {{ link()?.title }} <br>
+            } @else {
+                ShortCode: {{ link()?.shortCode }} <br>
+            }
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    ShortLink: {{ apiUrl + "/" + link()?.shortCode }} <br>
     Url: {{ link()?.originalUrl }}
-</div>
-<hr>
-<div>
-    Total Clicks: {{ analytics()?.totalClickEvents }} <br>
-    Clicks Today:   {{ analytics()?.clickEventsToday }} <br>
-    Clicks This Week: {{ analytics()?.clickEventsWeek }} <br>
-    Click Last 30 Days: <br>
-    @if (analytics()?.clickEvents30Days)
-    {
-        <ul>
-            @for (clickByDate of analytics()?.clickEvents30Days; track $index)
-            {
-                <li> {{clickByDate.date}}: {{clickByDate.count}} </li>
-            }
-        </ul>
-    }
-    TopReferrers: <br>
-    @if (analytics()?.topReferrer)
-    {
-        <ul>
-            @for (referrer of analytics()?.topReferrer; track $index)
-            {
-                <li> {{referrer.referrer}}: {{referrer.count}} </li>
-            }
-        </ul>
-    }
-</div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Analytics
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        Total Clicks: {{ analytics()?.totalClickEvents }} <br>
+        Clicks Today:   {{ analytics()?.clickEventsToday }} <br>
+        Clicks This Week: {{ analytics()?.clickEventsWeek }} <br>
+        Click Last 30 Days: <br>
+        @if (analytics()?.clickEvents30Days)
+        {
+            <ul>
+                @for (clickByDate of analytics()?.clickEvents30Days; track $index)
+                {
+                    <li> {{clickByDate.date}}: {{clickByDate.count}} </li>
+                }
+            </ul>
+        }
+        TopReferrers: <br>
+        @if (analytics()?.topReferrer)
+        {
+            <ul>
+                @for (referrer of analytics()?.topReferrer; track $index)
+                {
+                    <li> {{referrer.referrer}}: {{referrer.count}} </li>
+                }
+            </ul>
+        }
+    </mat-card-content>
+    <canvas baseChart
+        [data]="chartData"
+        [type]="'bar'"
+        [options]="chartOptions"
+        style="max-width: 600px; max-height: 300px;">
+    </canvas>
+</mat-card>

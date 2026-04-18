@@ -1,19 +1,24 @@
-<div>
-    Total Links: {{ dashboard()?.totalLinks }} <br>
-    Total Clicks: {{ dashboard()?.totalClicks }} <br>
-    Clicks Today: {{ dashboard()?.clicksToday }} <br>
-    Top Links: <br>
-    @if(dashboard()?.topLinks)
-    {
-        <ul>
-            @for (link of dashboard()?.topLinks; track $index) {
-                <li>{{ link.shortCode }}</li>
-            }
-        </ul>
-    } @else {
-        none
-    }
-</div>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Global Statistics</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        Total Links: {{ dashboard()?.totalLinks }} <br>
+        Total Clicks: {{ dashboard()?.totalClicks }} <br>
+        Clicks Today: {{ dashboard()?.clicksToday }} <br>
+        Top Links: <br>
+        @if(dashboard()?.topLinks)
+        {
+            <ul>
+                @for (link of dashboard()?.topLinks; track $index) {
+                    <li>{{ link.shortCode }}</li>
+                }
+            </ul>
+        } @else {
+            none
+        }
+    </mat-card-content>
+</mat-card>
 
 <app-link-form (linkCreated)="onLinkCreated()"/>
 

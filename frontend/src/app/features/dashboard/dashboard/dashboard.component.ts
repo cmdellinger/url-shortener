@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 import { LinkFormComponent } from "../link-form/link-form.component";
 import { LinkListComponent } from "../link-list/link-list.component";
@@ -9,7 +10,11 @@ import { Dashboard } from '../../../core/models/dashboard.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [LinkFormComponent, LinkListComponent],
+  imports: [
+    LinkFormComponent,
+    LinkListComponent,
+    MatCardModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
