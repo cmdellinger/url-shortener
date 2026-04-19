@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "https://snipurl-fuejbfhnh0fgeyem.westus2-01.azurewebsites.net/$1" }
+  ]
+}
