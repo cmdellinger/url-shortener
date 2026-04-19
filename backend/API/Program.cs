@@ -56,7 +56,9 @@ builder.Services.AddCors(opt =>
     opt.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(
-            "http://localhost:4200"
+            "http://localhost:4200",
+            "https://snipurl.charlesdellinger.com",
+            "https://kind-desert-06b16861e.7.azurestaticapps.net"
         );
     });
 });
