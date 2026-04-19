@@ -28,5 +28,7 @@
                 <button matButton (click)="onDelete(link.id)">delete</button>
             </mat-card-actions>
         </mat-card>
+    } @empty {
+        <p>No links yet.</p>
     }
 </mat-card>
