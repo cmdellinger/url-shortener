@@ -54,7 +54,7 @@ export class LinkFormComponent {
         this.newLinkForm.reset();
         this.linkCreated.emit();
 
-        const shortUrl = `${environment.apiUrl}/${link.shortCode}`;
+        const shortUrl = `${environment.shortUrlBase}/${link.shortCode}`;
         const snackBarRef = this.snackBar.open(
           shortUrl, 'Copy', { duration: 5000 }
         );

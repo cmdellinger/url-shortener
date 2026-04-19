@@ -13,10 +13,10 @@
             </mat-card-header>
             <mat-card-content>
                 short url: 
-                <a [href]="apiUrl + '/' + link.shortCode"
+                <a [href]="shortUrlBase + '/' + link.shortCode"
                     target="_blank"
                     rel="noopener noreferrer">
-                    {{ apiUrl }}/{{ link.shortCode }}
+                    {{ shortUrlBase }}/{{ link.shortCode }}
                 </a>
                 <br>
                 original url: {{ link.originalUrl }}

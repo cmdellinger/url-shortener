@@ -26,7 +26,7 @@ export class AnalyticsComponent implements OnInit {
   analytics = signal<LinkAnalytics | null>(null);
   link = signal<Link | null>(null);
   
-  readonly apiUrl = environment.apiUrl;
+  readonly shortUrlBase = environment.shortUrlBase;
   
   chartData: ChartData<'bar'> = {
     labels: [],
